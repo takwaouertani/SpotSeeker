@@ -1,0 +1,225 @@
+<app-navbar></app-navbar>
+<section class="body">
+    <div class="container">
+      <div class="row">
+      <img src="assets/destination7.jpg" class="d-block w-100" class="search-image">
+      <div class=" d-none d-md-block image-text">
+          <h2>Find your perfect spot on SpotSeeker</h2>
+          <p >Discover top-rated locations for your next adventure!</p>
+        </div>
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <span class="close" (click)="closeModal()">&times;</span>
+            <h2>Explore Filters</h2>
+            <br>
+            <p >Location Type</p>
+            <div class="container2">
+              <div>
+                <p>Governorate</p>
+                <select id="states" [(ngModel)]="selectedState" (change)="displayCities()" class="option">
+                  <option value="">Select a Governorate</option>
+                  <option *ngFor="let state of getStates()" [value]="state">{{ state }}</option>
+                </select>
+              </div>
+        
+              <div *ngIf="cities.length > 0" style="margin-left:50px;">
+                <p>City</p>
+                <select id="cities" [(ngModel)]="selectedCity" class="custom-select option">
+                  <option value="">Select a city</option>
+                  <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+                </select>
+              </div>
+            </div>
+            <br> 
+            <p>Category</p>
+
+            <div class="container1">
+              
+              <button class="category-button" [ngClass]="{'selected': selectedCategory === 'Picnic spot'}" (click)="selectCategory('Picnic spot')">
+                <i class="fa-solid fa-tree"></i>Picnic spot
+              </button>
+              <button class="category-button" [ngClass]="{'selected': selectedCategory === 'Event'}" (click)="selectCategory('Event')">
+                <i class="fas fa-bullhorn"></i>Event
+              </button>
+              <button class="category-button" [ngClass]="{'selected': selectedCategory === 'Restaurant'}" (click)="selectCategory('Restaurant')">
+                <i class="fa-solid fa-utensils"></i>Restaurant
+              </button>
+              <button class="category-button" [ngClass]="{'selected': selectedCategory === 'cafe'}" (click)="selectCategory('cafe')">
+                <i class="fa-solid fa-mug-saucer"></i>cafe
+              </button>
+          </div>
+            <br>
+            <p>Other seating options</p>
+            <div class="container1 center-div">
+              <div>
+                <input type="checkbox" [(ngModel)]="filters.wifi" id="wifi">
+                <label for="wifi">wifi_availibily</label>
+              </div>
+              <div>
+                <input type="checkbox" [(ngModel)]="filters.reservation" id="reservation">
+                <label for="reservation">Reservation</label>
+              </div>
+              <div>
+                <input type="checkbox" [(ngModel)]="filters.smokingPlace" id="smokingPlace">
+                <label for="smokingPlace">smoking_area</label>
+              </div>
+              <div>
+                <input type="checkbox" [(ngModel)]="filters.parking_Space" id="parking_Space">
+                <label for="parking_Space">parking_Space</label>
+              </div>
+              <div>
+                <input type="checkbox" [(ngModel)]="filters.outdoorPlace" id="outdoorPlace">
+                <label for="outdoorPlace">Outdoor Place</label>
+              </div>
+              <div>
+                <input type="checkbox" [(ngModel)]="filters.petFriendly" id="petFriendly">
+                <label for="petFriendly">pet_friendly</label>
+              </div>
+              <div>
+                <input type="checkbox" [(ngModel)]="filters.kidsCorner" id="kidsCorner">
+                <label for="kidsCorner">Kid's corner</label>
+              </div>
+              <div>
+                <input type="checkbox" [(ngModel)]="filters.credit_card" id="credit_card">
+                <label for="credit_card">credit_card</label>
+              </div>
+            </div>            
+            <div class="container1">
+              <button class="btn-reset" (click)="resetFilters()">Reset Filters</button>
+              <button class="btn-apply" (click)="applyFilters()">Apply Filters</button>
+            </div>
+            
+          </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center position-relative">
+          <div class="image-input">
+              <input type="text" class="form-control search" placeholder="Where do you want to go?" name="search" (click)="openModal()" />
+          </div>
+          <div class="image-btn">
+              <button type="submit" class="btn btn-block" name='valider'>
+                  <i class="fa-solid fa-arrow-right" style="color: rgb(47, 101, 146);"></i>
+              </button>
+          </div>
+      </div>
+      </div>
+     </div>
+
+
+     <div class="container-fluid">
+      <h5 class="row text-center destinations">Explore Destinations</h5>
+      <div class="d-flex flex-wrap justify-content-center">
+          <div class="destination-item long-item">
+              <img src="assets/cafe3.jpg" alt="Coffee Shops" class="img-fluid rounded">
+              <span class="tag-text">Coffee Shops</span>
+          </div>
+  
+          <div class="d-flex flex-column align-items-center destination-column">
+              <div class="destination-item">
+                  <img src="assets/amusement.jpg" alt="Amusement Park" class="img-fluid rounded">
+                  <span class="tag-text">Amusement Park</span>
+              </div>
+  
+              <div class="destination-item mt-4">
+                  <img src="assets/n1.png" alt="Park" class="img-fluid rounded">
+                  <span class="tag-text">Park</span>
+              </div>
+          </div>
+  
+          <div class="destination-item long-item">
+              <img src="assets/r2.jpg" alt="Restaurants" class="img-fluid rounded">
+              <span class="tag-text">Restaurants</span>
+          </div>
+  
+          <div class="d-flex flex-column align-items-center destination-column">
+              <div class="destination-item">
+                  <img src="assets/ev1.jpg" alt="Events" class="img-fluid rounded">
+                  <span class="tag-text">Events</span>
+              </div>
+  
+              <div class="destination-item mt-4">
+                  <img src="assets/R.jpg" alt="Camping" class="img-fluid rounded">
+                  <span class="tag-text">Camping</span>
+              </div>
+          </div>
+      </div>
+  </div>
+    <br><br>
+
+    <div class="row text-center destinations" >
+    <h5>Most rated destinations</h5> 
+      <div  class="carousel-container">
+      <button class="prev" (click)="prevSlide()">&#10094;</button>
+      <div class="carousel-wrapper">
+        <div class="carousel" [style.transform]="'translateX(' + translateX + 'px)'">
+          <div *ngFor="let destination of mostRatedDestinations" class="carousel-slide">
+            <div class="carousel-card">
+              <div class="carousel-image-slider">
+                <img  [src]="destination.images[0]">
+              </div>
+              <div class="carousel-info">
+                <h3>{{ destination.name_destination }}</h3>
+                <p><strong>Location:</strong> {{ destination.adresse }}</p>
+                <p><strong>Vibe:</strong> {{ destination.category }}</p>
+                <button class="carousel-details-button" (click)="navigateToDetails(destination.id_destination)">See More</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="next" (click)="nextSlide()">&#10095;</button>
+    </div>
+    </div>
+
+    <section id="forms">
+      <div class="container">
+        <div class="icon-container">
+          <i class="fa-solid fa-money-bill"></i>
+        </div>
+        <p class="main-text">
+          EXCLUSIVE DEALS FOR UNFORGETTABLE EXPERIENCES !
+        </p>
+        <div class="content-container">
+          <div class="div-destination">
+            <i class="fa-solid fa-quote-left"></i>
+            <p>
+              <br>
+              Ready to showcase your unique destination to the world? <br><br>
+              Whether it's a delightful restaurant serving up culinary <br>
+              delights, or a cozy café with a warm ambiance, your <br>
+              property has its own special charm waiting to be discovered. <br><br>
+              Join us now to feature your destination and connect with food <br>
+              enthusiasts and travelers seeking memorable dining experiences. <br><br>
+              <span class="highlight-text">Sign up now to create............!</span>
+            </p>
+            <button class="destination-button" routerLink="/formulaire_proprietaire">Join now</button>
+          </div>
+          <div class="div-destination">
+            <i class="fa-solid fa-quote-left"></i>
+            <p>
+              <br> Excited to share an unforgettable event?<br><br> Whether it's a concert, festival, or community <br> gathering, your event deserves to be discovered by others! <br><br> Join us today to create a buzz around your event <br> and let people know why it's a can't-miss experience<br><br>
+              <span class="highlight-text">Sign up now to create............!</span>
+            </p>
+          
+            <button class="event-button" routerLink="/organiser_request">Join now</button>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col">
+        <div class="popup-container" *ngIf="isPopupVisible2">
+          <div class="popup">
+            <span class="close-button" (click)="closePopup2()">&times;</span>
+            <br>
+            <p class="popup-text">what do you want to add?</p>
+            <div class="popup-options">
+              <div class="popup-option" routerLink="/formulaire_proprietaire">Destination</div>
+              <div class="popup-option" routerLink="/formulaire_proprietaire">Event</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+</section>
+<app-footer></app-footer>

@@ -1,0 +1,538 @@
+
+<app-navbar></app-navbar>
+<br><br><br><section class="BigSection">
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel"  data-bs-interval="2000">
+    <div class="carousel-inner">
+      <div *ngFor="let image of destination.images; let i = index" [class.active]="i === 0" class="carousel-item">
+        <img [src]="image" class="d-block w-100 custom-image-size im" alt="Image">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+<div class="container">
+ 
+    <div class="section">
+      <br><h5 class="title">Details</h5> <br>
+      <p class="category">{{ destination.category }}</p>
+      <p class="type">{{ destination.type_destination }}</p>
+      <p  class="description">{{ destination.description }}</p><br>
+      <p ><span class="adresse" >Location : </span>  {{ destination.adresse }}<br>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1B2C3D4E5F6G7H8I9J0KLMNOPQR" async defer></script>
+      <br><br><br>
+      <button  class="moredetails" (click)="openPopup()">View more details </button>
+    </div>
+      
+    <div class="popup-container" *ngIf="isPopupVisible">
+      <div class="popup">
+        <span class="close-button" (click)="closePopup()">X</span>
+        <br><h5 class="pTitle">Contact</h5><br>
+        
+        <div class="EmailFb"><span class="detail"><i class="fa-solid fa-envelope email-icon iDestination" ></i>Email:  </span><span class="destinationInfo">{{ destination.email_destination }}</span><br>
+        <span class="Phone detail" ><i class="fa-solid fa-phone phone-icon iDestination"></i> Phone number: </span> <span class="destinationInfo">{{ destination.destinaition_phone_number }}</span></div><br>
+        <div class="EmailFb"><span class="detail"><i class="fa-brands fa-facebook iDestination iFacebook" ></i>Facebook: </span> <span class="destinationInfo">{{ destination.facebook }}</span><br>
+        <span class="detail Instagram"><i class="fa-brands fa-instagram instagram-icon iDestination" ></i>Instagram: </span>  <span class="destinationInfo">{{ destination.instagram }}</span></div><br>
+
+        
+        <p class="EmailFb"><i class="fa-solid fa-money-bill iDestination"></i><span class="detail" > Price Range: </span><span class="destinationInfo">{{ destination.min_price }}DT ~ {{ destination.max_price }}DT</span>  </p><br>
+        
+        <h5 class="pTitle">Features</h5><br>
+<div class="firstSecond">
+        <div class="firstpart">
+          <p class="features" *ngIf="destination.wifi_availibily; else wifiNotAvailable">
+            <i class="fa-solid fa-wifi trueRight" ></i> Free Wi-Fi 
+            <i class="fa-solid fa-check iTrue" ></i>
+        </p>
+        <ng-template #wifiNotAvailable>
+            <p class="features">
+                <i class="fa-solid fa-wifi false" ></i> Free Wi-Fi 
+                <i class="fa-solid fa-xmark iFalse" ></i>
+            </p>
+        </ng-template>
+        <br>
+    
+        <p class="features" *ngIf="destination.pet_friendly ; else petNotAvailable">
+            <i class="fa-solid fa-paw trueRight" ></i> Pet-Friendly 
+            <i class="fa-solid fa-check iTrue" ></i>
+        </p>
+        <ng-template #petNotAvailable>
+            <p class="features">
+                <i class="fa-solid fa-paw false" ></i> Pet-Friendly 
+                <i class="fa-solid fa-xmark iFalse" ></i>
+            </p>
+        </ng-template>
+        <br>
+        <p class="features" *ngIf="destination.kids_corner ; else kidsNotAvailable">
+          <i class="fa-solid fa-children trueRight" ></i> Kids' Corner 
+          <i class="fa-solid fa-check iTrue" ></i>
+      </p>
+      <ng-template #kidsNotAvailable>
+          <p class="features">
+              <i class="fa-solid fa-children false" ></i> Kids' Corner 
+              <i class="fa-solid fa-xmark iFalse" ></i>
+          </p>
+      </ng-template>
+      <br>
+  
+      <p class="features" *ngIf="destination.smoking_area ; else smokingNotAvailable">
+          <i class="fa-solid fa-smoking trueRight" ></i> Smoking 
+          <i class="fa-solid fa-check iTrue" ></i>
+      </p>
+      <ng-template #smokingNotAvailable>
+          <p class="features">
+              <i class="fa-solid fa-smoking false"></i> Smoking 
+              <i class="fa-solid fa-xmark iFalse" ></i>
+          </p>
+      </ng-template>
+      <br>
+  </div>
+      <div class="secondpart">
+        <p class="features" *ngIf="destination.parking ; else parkingNotAvailable">
+          <i class="fa-solid fa-square-parking trueRight" ></i> Parking 
+          <i class="fa-solid fa-check iTrue" ></i>
+      </p>
+      <ng-template #parkingNotAvailable>
+          <p class="features">
+              <i class="fa-solid fa-square-parking false" ></i> Parking 
+              <i class="fa-solid fa-xmark iFalse" ></i>
+          </p>
+      </ng-template>
+      <br>
+  
+      <!-- Credit Cards -->
+      <p class="features" *ngIf="destination.credit_card ; else creditCardNotAvailable">
+          <i class="fa-regular fa-credit-card trueRight" ></i> Credit Cards 
+          <i class="fa-solid fa-check iTrue" ></i>
+      </p>
+      <ng-template #creditCardNotAvailable>
+          <p class="features">
+              <i class="fa-regular fa-credit-card false" ></i> Credit Cards 
+              <i class="fa-solid fa-xmark iFalse" ></i>
+          </p>
+      </ng-template>
+      <br>
+  
+      <!-- Reservation -->
+      <p class="features" *ngIf="destination.reservation ; else reservationNotAvailable">
+          <i class="fa-solid fa-calendar-check trueRight" ></i> Reservation 
+          <i class="fa-solid fa-check iTrue" ></i>
+      </p>
+      <ng-template #reservationNotAvailable>
+          <p class="features">
+              <i class="fa-solid fa-calendar-check false" ></i> Reservation 
+              <i class="fa-solid fa-xmark iFalse" ></i>
+          </p>
+      </ng-template>
+      <br>
+      </div>
+    </div>
+      
+
+        
+      </div>
+    </div>
+      <!-- d2 -->
+      <div class="section">
+        <br><h5 class="title">Menu
+        </h5>
+        <div class="menu">
+          
+          <img *ngFor="let image of getFilteredImages(menuImagesa)" 
+          [src]="image.url" 
+          [style]="image.style">
+   
+     <div class="side-images">
+       <!-- Utiliser la méthode pour obtenir les images filtrées -->
+       <img *ngFor="let image of getFilteredImages(menuImagesb)" 
+            [src]="image.url" 
+            [style]="image.style">
+     </div>
+   
+     <!-- Utiliser la méthode pour obtenir les images filtrées -->
+     <img *ngFor="let image of getFilteredImages(menuImagesc)" 
+          [src]="image.url" 
+          [style]="image.style">
+   
+     <div>
+       <!-- Utiliser la méthode pour obtenir les images filtrées -->
+       <img *ngFor="let image of getFilteredImages(menuImagesd)" 
+            [src]="image.url" 
+            [style]="image.style">
+           
+
+     </div>
+   
+   </div>
+
+
+   <button *ngIf="!isPopupVisible && !isPopupVisible2" class="view-more" (click)="openPopup2()">
+    <i class="fa-regular fa-images"></i>
+  </button>
+            <div class="popup-container" *ngIf="isPopupVisible2">
+        <div class="popup scrollable-container" >
+          <span class="close-button" (click)="closePopup2()">X</span>
+          <h4 class="titleAllPictures">All menu pictures</h4>
+          <div class="image-container">
+            <img *ngFor="let image of destination.menu" [src]="image" [style.width.px]="200" [style.height.px]="200" class="image">
+          </div>
+          
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- place name -->
+<div *ngIf="!isPopupVisible && !isPopupVisible2"  class="placename" >
+  <ng-container>
+     <div class="carousel-item active">
+    <div class="carousel-caption d-none d-md-block">
+    <h4 class="place destinationName" > {{ destination.name_destination }}</h4></div></div>
+
+  </ng-container>
+
+</div>
+<!-- d3 -->
+<div class="reviewsection">
+  <p class="reviews">Reviews
+    <button class="more writeReview" (click)="toggleRateForm()">write a review</button>
+
+    
+     <div class="review">
+      <div class="result-data">
+          <div class="result-rate">
+            <div class="rating-div">
+            <br><p class="review-details">{{ averageRating.toFixed(1)}}</p>
+              <div [innerHTML]="getMostFrequentRatingStars()">
+                  
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+                </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+              </svg></div>
+              <br><p class="review-details">{{ CommentCount$ | async }} reviews</p><div>
+              </div>
+          </div>
+          </div>
+      </div>
+          
+      <div class="review-container" *ngIf="!isPopupVisible && !isPopupVisible2">
+        <div class="review-item" *ngFor="let rating of [5, 4, 3, 2, 1]">
+          <div>
+            <span class="rating-label">{{ getCommentText(rating) }}</span>
+          </div>
+          <div class="progress">
+            <div class="progress-bar" [style.width]="getProgressBarWidth(rating)"></div>
+          </div>
+        </div>
+      </div>
+        <!-- login adherant -->
+        <div class="popup-container" *ngIf="isPopupVisible3">
+          <div class="popup">
+            <span class="close-button" (click)="closePopup3() ">X</span>
+            <form class="form" #loginForm="ngForm"
+            (ngSubmit)="loginForm.form.valid && login(emailInput.value, passwordInput.value) ; addComment(emailInput.value,passwordInput.value)" novalidate>
+              <div class="flex-column">
+                <label>Email </label>
+              </div>
+              <div class="inputForm" [ngClass]="{'is-invalid-input-container': emailInput.invalid && (emailInput.dirty || emailInput.touched)}">
+                <svg height="20" viewBox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg">
+                  <g id="Layer_3" data-name="Layer 3">
+                    <path d="m30.853 13.87a15 15 0 0 0 -29.729 4.082 15.1 15.1 0 0 0 12.876 12.918 15.6 15.6 0 0 0 2.016.13 14.85 14.85 0 0 0 7.715-2.145 1 1 0 1 0 -1.031-1.711 13.007 13.007 0 1 1 5.458-6.529 2.149 2.149 0 0 1 -4.158-.759v-10.856a1 1 0 0 0 -2 0v1.726a8 8 0 1 0 .2 10.325 4.135 4.135 0 0 0 7.83.274 15.2 15.2 0 0 0 .823-7.455zm-14.853 8.13a6 6 0 1 1 6-6 6.006 6.006 0 0 1 -6 6z"></path>
+                  </g>
+                </svg>
+                <input class="input"  [placeholder]="emailInput.invalid && (emailInput.dirty || emailInput.touched) ? 'Email is required' : 'Enter your Email'" 
+                type="email"
+				  name="email"
+				  
+				  [(ngModel)]="email"
+				  #emailInput="ngModel"
+				  required>
+              </div>
+        
+              <div class="flex-column">
+                <label>Password </label>
+              </div>
+              <div class="inputForm"  [ngClass]="{'is-invalid-input-container': passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)}">
+                <svg height="20" viewBox="-64 0 512 512" width="20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="m336 512h-288c-26.453125 0-48-21.523438-48-48v-224c0-26.476562 21.546875-48 48-48h288c26.453125 0 48 21.523438 48 48v224c0 26.476562-21.546875 48-48 48zm-288-288c-8.8125 0-16 7.167969-16 16v224c0 8.832031 7.1875 16 16 16h288c8.8125 0 16-7.167969 16-16v-224c0-8.832031-7.1875-16-16-16zm0 0"></path><path d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0"></path>
+                </svg>
+                <input type="password" class="input"
+                [placeholder]="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)  ? 'Password is required' : 'Enter your password'"
+                name="pass"
+               
+                
+                [(ngModel)]="pass"
+                #passwordInput="ngModel"
+                minlength="6"
+                 [ngClass]="{ 'is-invalid': passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)  }"
+                 required/>
+              </div>
+              <div *ngIf="errorLoginMessage" class="error-message">
+                {{ errorLoginMessage }}
+              </div>
+              <div class="flex-row">
+                <div>
+                  <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe">
+                  <label>Remember me </label>
+                </div>
+                <span class="span" (click)="toggleforgotpass()">Forgot password?</span>
+              </div>
+              {{InexistantAccountMessage}}
+              <button class="button-submit" [disabled]="loginForm.invalid" >Sign In</button>
+                              <p class="p">Don't have an account? <span class="span" (click)="toggleSignIn()">Sign Up</span></p>
+              <p class="p line">Or With</p>
+              <div class="flex-row">
+                <button id="google-signin-button" class="btn google" (click)="signinwithgoogle()">
+                  <svg version="1.1" width="20" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                    <path style="fill:#FBBB00;" d="M113.47,309.408L95.648,375.94l-65.139,1.378C11.042,341.211,0,299.9,0,256
+                      c0-42.451,10.324-82.483,28.624-117.732h0.014l57.992,10.632l25.404,57.644c-5.317,15.501-8.215,32.141-8.215,49.456
+                      C103.821,274.792,107.225,292.797,113.47,309.408z"></path>
+                    <path style="fill:#518EF8;" d="M507.527,208.176C510.467,223.662,512,239.655,512,256c0,18.328-1.927,36.206-5.598,53.451
+                      c-12.462,58.683-45.025,109.925-90.134,146.187l-0.014-0.014l-73.044-3.727l-10.338-64.535
+                      c29.932-17.554,53.324-45.025,65.646-77.911h-136.89V208.176h138.887L507.527,208.176L507.527,208.176z"></path>
+                    <path style="fill:#28B446;" d="M416.253,455.624l0.014,0.014C372.396,490.901,316.666,512,256,512
+                      c-97.491,0-182.252-54.491-225.491-134.681l82.961-67.91c21.619,57.698,77.278,98.771,142.53,98.771
+                      c28.047,0,54.323-7.582,76.87-20.818L416.253,455.624z"></path>
+                    <path style="fill:#F14336;" d="M419.404,58.936l-82.933,67.896c-23.335-14.586-50.919-23.012-80.471-23.012
+                      c-66.729,0-123.429,42.957-143.965,102.724l-83.397-68.276h-0.014C71.23,56.123,157.06,0,256,0
+                      C318.115,0,375.068,22.126,419.404,58.936z"></path>
+                  </svg>
+                  Google 
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        <!-- Sign Up Form -->
+<div class="popup-container" *ngIf="showSignUpForm">
+<div class="popup">
+  <span class="close-button" (click)="closeSignUpForm()">X</span>
+  <form class="form" #signUpForm="ngForm"
+  (ngSubmit)="signUpForm.form.valid && signup(emailInp.value, passwordInp.value)" novalidate>
+    <div class="flex-column">
+      
+      <label>Email</label>
+    </div>
+    <div class="inputForm" [ngClass]="{'is-invalid-input-container': emailInp.invalid && (emailInp.dirty || emailInp.touched)}">
+      <svg height="20" viewBox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg">
+        <g id="Layer_3" data-name="Layer 3">
+          <path d="m30.853 13.87a15 15 0 0 0 -29.729 4.082 15.1 15.1 0 0 0 12.876 12.918 15.6 15.6 0 0 0 2.016.13 14.85 14.85 0 0 0 7.715-2.145 1 1 0 1 0 -1.031-1.711 13.007 13.007 0 1 1 5.458-6.529 2.149 2.149 0 0 1 -4.158-.759v-10.856a1 1 0 0 0 -2 0v1.726a8 8 0 1 0 .2 10.325 4.135 4.135 0 0 0 7.83.274 15.2 15.2 0 0 0 .823-7.455zm-14.853 8.13a6 6 0 1 1 6-6 6.006 6.006 0 0 1 -6 6z"></path>
+        </g>
+      </svg>
+      <input class="input"  [placeholder]="emailInp.invalid && (emailInp.dirty || emailInp.touched) ? 'Email is required' : 'Enter your Email'" 
+      type="email"
+name="emailSignUp"
+
+[(ngModel)]="emailSignUp"
+#emailInp="ngModel"
+required>
+    </div>
+    <div class="flex-column">
+      <label>Password</label>
+    </div>
+    <div class="inputForm" [ngClass]="{'is-invalid-input-container': passwordInp.invalid && (passwordInp.dirty || passwordInp.touched )}">
+      <svg height="20" viewBox="-64 0 512 512" width="20" xmlns="http://www.w3.org/2000/svg">
+        <path d="m336 512h-288c-26.453125 0-48-21.523438-48-48v-224c0-26.476562 21.546875-48 48-48h288c26.453125 0 48 21.523438 48 48v224c0 26.476562-21.546875 48-48 48zm-288-288c-8.8125 0-16 7.167969-16 16v224c0 8.832031 7.1875 16 16 16h288c8.8125 0 16-7.167969 16-16v-224c0-8.832031-7.1875-16-16-16zm0 0"></path><path d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0"></path>
+      </svg>
+      <input type="password" class="input"
+      [placeholder]="passwordInp.invalid && (passwordInp.dirty || passwordInp.touched) || passwordInp.errors?.['minlength'] ? 'password is required' : 'Enter your Password'"
+      name="passwordSignUp"
+     
+      
+      [(ngModel)]="passwordSignUp"
+      #passwordInp="ngModel" 
+      minlength="6"
+       [ngClass]="{ 'is-invalid': passwordInp.invalid && (passwordInp.dirty || passwordInp.touched  || passwordInp?.errors?.['minlength'] )}"
+       required/>
+      
+    </div>
+    <div class="text-sm passwordCaractere" *ngIf="passwordInp?.errors?.['minlength'] && passwordInp?.dirty">
+      Password must be at least 6 caractères long.
+  </div>
+
+    <div class="flex-column">
+      <label>Confirm Password</label>
+    </div>
+    <div class="inputForm" [ngClass]="{'is-invalid-input-container': passwordInpConfirm.invalid && (passwordInpConfirm.dirty || passwordInpConfirm.touched)}">
+      <svg height="20" viewBox="-64 0 512 512" width="20" xmlns="http://www.w3.org/2000/svg">
+        <path d="m336 512h-288c-26.453125 0-48-21.523438-48-48v-224c0-26.476562 21.546875-48 48-48h288c26.453125 0 48 21.523438 48 48v224c0 26.476562-21.546875 48-48 48zm-288-288c-8.8125 0-16 7.167969-16 16v224c0 8.832031 7.1875 16 16 16h288c8.8125 0 16-7.167969 16-16v-224c0-8.832031-7.1875-16-16-16zm0 0"></path><path d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0"></path>
+      </svg>
+      <input type="password"
+      class="input"
+     [placeholder]="passwordInpConfirm.invalid && (passwordInpConfirm.dirty || passwordInpConfirm.touched) ? 'Confirm password is required' : 'Enter your Password'"
+     name="passwordConfirm"
+    
+     
+     [(ngModel)]="passwordConfirm"
+     #passwordInpConfirm="ngModel"
+     minlength="6"
+      [ngClass]="{ 'is-invalid': passwordInpConfirm.invalid && (passwordInpConfirm.dirty || passwordInpConfirm.touched) }"
+      required/>
+    </div>
+    <div *ngIf="passwordsMismatch" class="error-message">
+      Passwords do not match.
+    </div>
+    <button class="button-submit" [disabled]="!emailSignUp || !passwordSignUp || !passwordConfirm || passwordSignUp !== passwordConfirm">Sign Up</button>
+    
+    <p class="p1" >{{ signupSuccessMessage }}</p> <!-- Display signup success message -->
+    <p class="p">Already have an account? <span class="span" (click)="toggleSignIn()">Sign In</span></p>
+  </form>
+</div>
+</div>
+
+
+<!-- forgot password-->
+<div class="popup-container" *ngIf="showSforgotpassForm">
+<div class="popup">
+  <span class="close-button" (click)="closeforgotpass()">X</span>
+  <form class="form" #forgotForm="ngForm"
+  (ngSubmit)="forgotForm.form.valid && forgotpassword() " novalidate>
+    <div class="flex-column">
+      <p>Please write you email to reset your password!</p>
+
+      <label>Email</label>
+    </div>
+    <div class="inputForm" [ngClass]="{'is-invalid-input-container': emailForgot.invalid && (emailForgot.dirty || emailForgot.touched)}">
+      <svg height="20" viewBox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg">
+        <!-- Email SVG -->
+      </svg>
+      <input class="input" 
+      [placeholder]="emailForgot.invalid && (emailForgot.dirty || emailForgot.touched) ? 'Email is required' : 'Enter your Email'" 
+     type="email"
+name="emailF"
+
+[(ngModel)]="emailF"
+#emailForgot="ngModel"
+required>
+    </div>
+
+   
+   
+    <button class="button-submit" [disabled]="forgotForm.invalid" >send Link</button>
+    <p class="pforgot"  id="message-container">{{ forgotpassmessage }}</p> 
+  </form>
+</div>
+</div>
+        
+
+        <!-- all comments section -->
+        <div class="allcomments">
+          <p class="titleAllReviews">All Reviews and Ratings</p> 
+          <hr class="AllcommentsVisible" *ngIf="!isPopupVisible && !isPopupVisible2 && !isPopupVisible3">
+      
+          <!-- Display the first comment -->
+          <div *ngIf="commentslist.length > 0">
+              <div *ngIf="commentslist[0].id_destination == this.identif">
+                  <p><span class="infoBold">Email:</span> {{ commentslist[0].email_adhrent }}</p><br>
+                  <p class="commentInfo"><span class="infoBold">Title : </span>{{ commentslist[0].title_comment }}</p><br>
+                  <p class="commentInfo"><span class="infoBold">Content : </span>{{ commentslist[0].content }}</p><br>
+                  <p class="commentInfo"><span class="infoBold">Rating: </span><span [innerHTML]="getStarIcons(commentslist[0].rates,'#f7e00f')"></span></p>
+                  <button class="moredetails" style="margin-top:3px ; margin-right: 2px; background-color: #152540;" (click)="toggleCommentsSection()" >
+                      {{ showAllComments ? 'Hide comments' : 'View more' }}
+                  </button>
+                  <hr class="infoBold" *ngIf="!isPopupVisible && !isPopupVisible2 && !isPopupVisible3"><br>
+              </div>
+          </div>
+      
+          <!-- Display the remaining comments when "View more details" is clicked -->
+          
+      </div>
+
+</div>
+<div id="commentsSection" class="containerComment">
+<div *ngIf="showAllComments && !isPopupVisible && !isPopupVisible2 && !isPopupVisible3" class="allcomments2">
+  <div *ngFor="let comment of commentslist.slice(1)">
+      <div *ngIf="comment.id_destination == this.identif">
+          <p><span class="infoBold">Email:</span> {{ comment.email_adhrent }}</p>
+          <p class="commentInfoPosition"><span class="infoBold">Title: </span>{{ comment.title_comment }}</p>
+          <p class="commentInfoPosition"><span class="infoBold">Content : </span>{{ comment.content }}</p>
+          <p class="commentInfoPosition"><span class="infoBold">Rating:</span> <span [innerHTML]="getStarIcons(comment.rates,'#f7e00f')"></span></p>
+          <hr class="infoBold" *ngIf="!isPopupVisible && !isPopupVisible2 && !isPopupVisible3"><br>
+      </div>
+  </div>
+</div>
+<!-- add comment section -->
+<div *ngIf="showRateForm" id="reviewForm" class="rate-form">
+<br><br><br>
+
+<div class="wrapper">
+  <div class="rating" *ngIf="!isPopupVisible && !isPopupVisible2 && !isPopupVisible3">
+    <!-- Star 1 -->
+    <input type="radio" id="star-1" name="star-radio" value="5" [(ngModel)]="rates">
+    <label for="star-1">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
+      </svg>
+    </label>
+    
+    <!-- Star 2 -->
+    <input type="radio" id="star-2" name="star-radio" value="4" [(ngModel)]="rates">
+    <label for="star-2">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
+      </svg>
+    </label>
+    
+    <!-- Star 3 --> 
+    <input type="radio" id="star-3" name="star-radio" value="3" [(ngModel)]="rates">
+    <label for="star-3">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
+      </svg>
+    </label>
+    
+    <!-- Star 4 -->
+    <input type="radio" id="star-4" name="star-radio" value="2" [(ngModel)]="rates">
+    <label for="star-4">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
+      </svg>
+    </label>
+    
+    <!-- Star 5 -->
+    <input type="radio" id="star-5" name="star-radio" value="1" [(ngModel)]="rates">
+    <label for="star-5">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
+      </svg>
+    </label>
+  </div>
+  
+  <br><br>
+  <h5 class="TitleExperience">Title of your Experience</h5>
+  <input type="text" [(ngModel)]="title_comment" name="reviewTitle" placeholder="Title of your review..." class="reviewTitle"><br><br>
+  <h5 class="TitleExperience">Share your Experience</h5>
+  <textarea [(ngModel)]="content" name="opinion" cols="30" rows="5" placeholder="Your opinion..."></textarea><br><br>
+  
+  <div class="btn-group" *ngIf="!isPopupVisible && !isPopupVisible2 && !isPopupVisible3">
+    <button type="submit" class="btn submit" (click)="openPopup3()">Submit</button>
+    <button class="btn cancel" (click)=" toggleRateForm()">Cancel</button>
+  </div>
+</div>
+</div>
+
+
+
+</div>
+
+</div>
+
+</section>

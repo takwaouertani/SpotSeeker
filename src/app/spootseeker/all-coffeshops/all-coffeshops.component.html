@@ -1,0 +1,223 @@
+<app-navbar></app-navbar>
+<br><br><br>
+<div class="container">
+    <aside class="sidebar">
+        <div class="scrollable-container"> 
+    
+            <div class="container1">
+                <div class="governorate">
+                    <p>Governorate</p>
+                    <select id="states" [(ngModel)]="selectedState" (change)="displayCities()" class="option">
+                      <option value="">Select a Governorate</option>
+                      <option *ngFor="let state of getStates()" [value]="state">{{ state }}</option>
+                    </select>
+                  </div>
+                <div class="city">
+                  <p>City</p>
+                  <select id="cities" [(ngModel)]="selectedCity" class="custom-select" class="option">
+                    <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+                  </select>
+                </div>
+                
+              </div>
+                
+            <button class="rechercher" type="submit" (click)="filterDestinations()">Submit</button>
+            <hr>
+            <div class="form-group">
+                <h3>Refine Your Search</h3>
+                <ul>
+                    <li>
+                        <input type="checkbox" name="checked" [(ngModel)]="credit_card">
+                        <label>credit_card</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked" [(ngModel)]="parking_Space">
+                        <label>Parking Space</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked" [(ngModel)]="Outdoor_Space">
+                        <label>Outdoor Space</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked" [(ngModel)]="Free_Wifi">
+                        <label>Free Wifi</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked" [(ngModel)]="Pet_Friendly">
+                        <label>Pet Friendly</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked" [(ngModel)]="Kids_Corner">
+                        <label>Kid's Corner</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked" [(ngModel)]="smoking_area">
+                        <label>Smoking Space</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked" [(ngModel)]="Reservation">
+                        <label>Reservation</label>
+                    </li>
+                  
+                </ul>
+            </div>
+            <div class="form-group">
+                <h3>Type de cafe</h3>
+                <ul>
+                    <li>
+                        <input type="radio" name="ttype" [(ngModel)]="selectedtype" value="Drive-thru coffee">
+                        <label>Drive-thru coffee</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="ttype" [(ngModel)]="selectedtype" value="coffee and tea house">
+                        <label>coffee and tea house</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="ttype" [(ngModel)]="selectedtype" value="coffee lounge">
+                        <label>coffee lounge</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="ttype" [(ngModel)]="selectedtype" value="bakery/café">
+                        <label>bakery/café</label>
+                    </li>
+                   
+                  
+                </ul>
+            </div>
+            
+            <div class="form-group">
+                <h3>Price range</h3>
+                <ul>
+                    <li>
+                        <input type="radio" name="price_range" [(ngModel)]="priceRange" value="under_30dt">
+                        <label>Under 30dt</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="price_range" [(ngModel)]="priceRange" value="30dt_70dt">
+                        <label>30dt - 70dt</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="price_range" [(ngModel)]="priceRange" value="70dt_100dt">
+                        <label>70dt - 100dt</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="price_range" [(ngModel)]="priceRange" value="over_100dt">
+                        <label>Over 100dt</label>
+                    </li>
+                </ul>
+            </div>
+            
+          
+            
+            <button class="rechercher" type="submit" (click)="Destinationfiltree()">Confirmer</button>
+
+        </div>
+    
+
+</aside>
+    <main class="content">
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="CoffeShop Name..." [(ngModel)]="searchTerm" (input)="Destinationfiltreeparnom()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+            </svg>
+        </div>
+        
+        <div *ngIf="filtrernom && filtrer == false && destinationstatecity == false">
+            <div class="restaurant-container">
+                <div class="restaurant-card" *ngFor="let destination of destinationparnomlist">
+                    <div class="image-slider">
+                        <img *ngFor="let image of destination.images" [src]="image">
+                    </div>
+                    <div class="espace">
+                        <h3>{{ destination.name_destination }}</h3>
+                    </div>
+                    <p>{{ destination.state }},{{ destination.city }}</p>
+                    <p> {{ destination.type_destination }}</p>
+                    <button class="details-button" (click)="navigateToDetails(destination.id_destination)">See More</button>
+                </div>
+            </div>
+        </div>
+       
+
+        <div *ngIf="filtrer == false && filtrernom == false && destinationstatecity == false">
+            <div class="restaurant-container">
+                <div class="restaurant-card" *ngFor="let destination of destinationlist">
+                    <div class="image-slider">
+                        <img *ngFor="let image of destination.images" [src]="image">
+                    </div>
+                    <div class="espace">
+                        
+                        <h3>{{ destination.name_destination }}</h3>
+                    </div>
+                    <p>{{ destination.state }},{{ destination.city }}</p>
+                   <p>{{ destination.type_destination }}</p>
+                    <button class="details-button" (click)="navigateToDetails(destination.id_destination)" [routerLink]="['/place', destination.id_destination]">See More</button>
+                </div>
+            </div>
+        </div>
+        
+    <div *ngIf="filtrer==true && filtrernom== false && destinationstatecity == false  && nonfilter== false">
+        <div class="restaurant-container">
+            <div class="restaurant-card" *ngFor="let destination of destinationCategorylist">
+              <div class="image-slider">
+                <img *ngFor="let image of destination.images" [src]="image">
+              </div>
+              <div class="espace">
+                <h3>{{ destination.name_destination }}</h3>
+              </div>
+              <p>{{ destination.state }},{{ destination.city }}</p>
+
+           <p>{{ destination.type_destination }}</p>
+              <button class="details-button" (click)="navigateToDetails(destination.id_destination)">See More</button>
+            </div>
+          </div>
+    </div>
+
+
+   
+
+     <div *ngIf="destinationstatecity && nonfilter == false && filtrer == false && filtrernom == false">
+        <div class="restaurant-container">
+            <div class="restaurant-card" *ngFor="let destination of destinationlistparcitystate">
+              <div class="image-slider">
+                <img *ngFor="let image of destination.images" [src]="image">
+              </div>
+              <div class="espace">
+                <h3>{{ destination.name_destination }}</h3>
+              </div>
+              <p>{{ destination.state }},{{ destination.city }}</p>
+              <p>{{ destination.type_destination }}</p>
+              <button class="details-button" (click)="navigateToDetails(destination.id_destination)">See More</button>
+            </div>
+          </div>
+    </div>
+
+
+
+    <div *ngIf="nonfilter && filtrer == true && filtrernom == false "class="no-destination">
+        <i class="fas fa-search"></i>
+        <h1>No CoffeShop Found</h1>
+    </div>
+
+
+
+
+    <div *ngIf="destinationstatecity && nonfilter == true && filtrer == false && filtrernom == false" class="no-destination">
+        <i class="fas fa-search"></i>
+        <h1>No CoffeShop Found</h1>
+    </div>
+    
+
+
+
+    
+    <div *ngIf="filtrernom && destinationparnomlist.length === 0">
+        <div class="no-destination">
+            <i class="fas fa-search"></i>
+            <h1>No CoffeShop Found</h1>
+        </div>
+    </div>
+
+    
+  </main>

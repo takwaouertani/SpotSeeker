@@ -1,0 +1,93 @@
+<body>
+    <section id="content">
+      
+        <main>
+            
+            <div class="head-title">
+                <div class="left">
+                    <h1>Dashboard</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a >Dashboard</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
+                        <li>
+                            <a class="active" routerLink="/home">Home</a>
+                        </li>
+                    </ul>
+                </div>
+              
+            </div>
+            <ul class="box-info">
+                <li>
+                    <i class="fa-regular fa-calendar" style="font-size: 30px;" ></i>
+                    <span class="text">
+                        <h3> {{ EventCount$ | async }}</h3>
+                        <div>
+                            Events
+                          </div>
+                    </span>
+                </li>
+                <li>
+                    <i class="fa-solid fa-map-location-dot" style="font-size: 30px; " ></i>
+                    <span class="text">
+                        <h3> {{ destinationCount$ | async }}</h3>
+                        <div>
+                            Destinations
+                          </div>
+                    </span>
+                </li>
+                <li>
+                    
+                    <i class="fa-solid fa-person-shelter" style="font-size: 30px;"></i>
+                    <span class="text">
+                        <h3> {{ OwnerCount$ | async }}</h3>
+                        <div>
+                            Owner requests
+                          </div>
+                    </span>
+                </li>
+                <li>
+                    <i class="fa-solid fa-ticket" style="font-size: 30px;"></i>
+                    <span class="text">
+                        <h3> {{ OrganiserCount$ | async }}</h3>
+                        <div>
+                            Organiser requests
+                          </div>
+                    </span>
+                </li>
+                <li>
+                    <i class="fa-regular fa-comment" style="font-size: 30px;"></i>
+                    <span class="text">
+                        <h3> {{ CommentCount$ | async }}</h3>
+                        <div>
+                            Comments
+                          </div>
+                    </span>
+                </li>
+            </ul>
+           <br><br><br>
+           <div class="chart">
+            <div class="pie" [chart]="pchart2"></div>
+            <div class="pie" [chart]="pchart"></div>
+          </div>
+          <br><br><br><br><br><br>
+          <!-- <div class="chart">
+          <div class="line" [chart]="chart"></div>      
+          <div class="line" [chart]="chart2"></div>      
+
+        </div> -->
+                  <br><br><br><br><br><br>
+
+          <div class="chart">
+            <div class="pie" [chart]="statePieChart"></div>
+            <div class="pie" [chart]="statePieChart2"></div>
+ 
+          </div>
+
+
+               
+
+        </main>
+    </section>
+</body>

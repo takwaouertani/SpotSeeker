@@ -1,0 +1,46 @@
+<section id="content">
+    <main>
+        <div class="head-title">
+            <div class="left">
+                <h1>Reviews</h1>
+                <ul class="breadcrumb">
+                <li>
+                    <a >Review</a>
+                </li>
+                <li><i class='bx bx-chevron-right' ></i></li>
+                <li>
+                    <a class="active" routerLink="/home">Home</a>
+                </li>
+            </ul>
+            </div>
+          
+        </div>
+        <div class="table-data">
+            <div class="order">
+                <div class="head">
+                    <h3>Reviews Details</h3>
+                    </div>
+
+<table>
+    <thead>
+        <tr>
+          <th>email_adhrent</th>
+          <!-- <th>rate</th> -->
+          <th>title_comment</th>
+          <th>content</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr  *ngFor="let d of comenlist">
+            <!-- <td>{{d.id_destination}}</td> -->
+            <td>{{d.email_adhrent}}</td>
+            <!-- <td>{{d.rates}}</td> -->
+            <td>{{d.title_comment}}</td>
+            <td>{{d.content}}</td>
+            <td>
+          </td>
+            <td><button class="btn" (click)="deletecomment(d)" > <i class="fa fa-trash" aria-hidden="true" style="color: red;"></i></button></td>
+        </tr>
+    </tbody>
+</table></div> </div> </main>
+</section>

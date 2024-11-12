@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "spotseeker-75fcd": {
+      "hosting": {
+        "app": [
+          "spotseeker-75fcd"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "spotseeker-75fcd"
+  }
+}

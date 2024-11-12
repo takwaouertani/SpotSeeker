@@ -1,0 +1,171 @@
+<div class="container">
+    <aside class="sidebar">
+    <div class="scrollable-container"> 
+
+        <div class="form-container">
+            <h2>Your Location Search</h2>
+            <form action="#">
+                <div class="form-group">
+                    <label for="city-area">City/Area:</label>
+                    <div class="input-container">
+                        <input type="text" id="city-area" name="city-area" class="gray-input">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="date-of-visit">Date of Event :</label>
+                    <div class="input-container">
+                        <input type="date" id="date-of-visit" name="date-of-visit" class="gray-input">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="number-of-gutters">Number of Gutters:</label>
+                    <div class="input-container">
+                        <input type="number" id="number-of-gutters" name="number-of-gutters" class="gray-input">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                        </svg>
+                    </div>
+                </div>
+            </form>   
+            <button class="rechercher" type="submit">Submit</button>
+            <hr>
+            <div class="form-group">
+                <h3>Refine Your Search</h3>
+                <ul>
+                    <li>
+                        <input type="checkbox" name="checked">
+                        <label>parking Space</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked">
+                        <label>Free Wifi</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked">
+                        <label>Reservation</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked">
+                        <label>Adults</label>
+                    </li>
+                </ul>
+            </div>
+             <div class="form-group">
+                <h3>Type Of Event </h3>
+                <ul>
+                    <li>
+                        <input type="checkbox" name="checked">
+                        <label>All Genres</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked">
+                        <label>Picnic Trip</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked">
+                        <label>music concert</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked">
+                        <label>Camping</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked">
+                        <label>book concert</label>
+                    </li>
+                   
+                     <li>
+                        <input type="checkbox" name="checked">
+                        <label>education concert</label>
+                    </li>
+                    
+                </ul>
+            </div>
+            <div class="form-group">
+                <h3>Price range</h3>
+                <ul>
+                    <li>
+                        <input type="checkbox" name="checked">
+                        <label>Free</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked">
+                        <label>under 30dt</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked">
+                        <label>30dt-70dt</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked">
+                        <label>70dt-100dt</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked">
+                        <label>over 100dt</label>
+                    </li>
+                </ul>
+            </div>
+           
+        </div>
+        <button class="confirmer" type="submit">Confirmer</button>
+
+    </div>
+
+    </aside>
+    <main class="content">
+        <h5>Results for</h5>
+        <h2 class="title">Top Picks in Your Location</h2>
+    
+        <div class="result-container">
+            <div class="result">
+                <img src="assets\eventimg.jpg">
+                <div class="result-data">
+                    <div class="result-rate">
+                        <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <br><p style="font-style: italic; font-size: smaller;">100 views</p><br>
+                    </div>
+
+
+                    </div>
+                    <h2>9ahwa mel 9hawi</h2>
+                    <div ><p style="font-style: italic"><strong>Location :</strong> 4 rue bellevue<br>
+                        <strong>Opening Date :</strong>15:00 PM<br>
+                        <strong>With Reservation</strong><br>
+                        <strong>Vibe:</strong> Cozy<br>
+                        Relaxing ambiance</p><br>
+                       
+                    </div>
+                
+                    
+                    
+                    <button class="more">More</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+</div>

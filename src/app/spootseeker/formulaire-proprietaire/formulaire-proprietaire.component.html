@@ -1,0 +1,414 @@
+<div class="div">
+  <button routerLink="/home" class="btn2">
+    <i class="fa-solid fa-angles-left" style="margin-right: 2px;"></i>Home
+    </button>
+  <!-- MultiStep Form -->
+  <div class="container-fluid" id="grad1">
+      <div class="row justify-content-center mt-0">
+          <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
+              <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                  <h2><strong>Join Us and Add Your Destination</strong></h2>
+                  <p>Be a part of our community by adding your destination.</p>
+                  <div class="row">
+                      <div class="col-md-12 mx-2">
+                          <form id="msform">
+                              <!-- progressbar -->
+                              <ul id="progressbar">
+                                <li [class.active]="currentStep >= 1" id="account"><strong>Account</strong></li>
+                                <li [class.active]="currentStep >= 2" id="personal"><strong>Location</strong></li>
+                                <li [class.active]="currentStep >= 3" id="payment"><strong>Details</strong></li>
+                                <li [class.active]="currentStep >= 4" id="confirm"><strong>Contact</strong></li>
+                            </ul>
+                              <fieldset *ngIf="currentStep === 1">
+                                  <div class="form-card">
+                                    <h2 class="fs-title">Owner Informations</h2>
+                                    <div class="group">
+                                      <div class="name">
+                                          <label for="firstName">First name</label>
+                                            <input type="text" id="firstName" name="firstName" placeholder="First Name" [(ngModel)]="ownerdata[0].first_name"/>
+                                            <i class="fa-solid fa-user-pen"></i>
+                                        </div>
+                                   <div class="name">
+                                      <label for="lastName">Last name</label>
+                                      <input type="text" id="lastName" name="lastName" placeholder="Last Name" [(ngModel)]="ownerdata[0].last_name"/>
+                                      <i class="fa-regular fa-circle-user"></i>
+                                  </div>
+                                    </div>
+                                    <div class="icone">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" placeholder="Email Address" [(ngModel)]="ownerdata[0].email"/>
+                                    <i class="fa-solid fa-envelope"></i>
+                                  </div>
+                                  <div class="icone">
+                                    <label for="phoneNumber">Phone number</label>
+                                    <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" [(ngModel)]="ownerdata[0].Phone_number"/>
+                                    <i class="fa-solid fa-mobile-screen-button"></i>
+                                    </div>
+                                    <input type="button" name="next" class="action-button action-button-center" value="Next " (click)="nextStep()">
+                                  </div>
+                                </fieldset> 
+
+
+                                <fieldset *ngIf="currentStep === 2">
+                                  <div class="form-card">
+                                      <h2 class="fs-title">Destination Details</h2>
+                                        <div class="group">
+                                          <div class="name">
+                                            <label for="destinationName">Destination Name</label>
+                                            <input type="text" id="destinationName" name="destinationName" placeholder="Destination Name"  [(ngModel)]="name_destination"/>
+                                            <i class="fa-solid fa-pen"></i>
+                                            </div>
+                                       <div class="name">
+                                        <label for="address">Address/Location</label>
+                                        <input type="text" id="address" name="address" placeholder="Address/Location"  [(ngModel)]="adresse"/>
+                                        <i class="fa-solid fa-location-dot" ></i>
+                                      </div>
+                                        </div>
+
+                                        <!-- <div class="container1">
+                                          <form [formGroup]="form">
+                                            <div style="margin-left: 15px;">
+                                              <label for="states">Governorate</label>
+                                              <select id="states" formControlName="selectedState" (change)="onStateChange()" class="option" [(ngModel)]="state">
+                                                <option value="">Select a Governorate</option>
+                                                <option *ngFor="let state of getStates()" [value]="state">{{ state }}</option>
+                                              </select>
+                                            </div>                               
+                                            <div *ngIf="cities.length > 0" style="margin-left: 90px;">
+                                              <label for="cities">City</label>
+                                              <select id="cities" formControlName="selectedCity" class="custom-select option" style="max-height: 150px; overflow-y: auto;"[(ngModel)]="city">
+                                                <option value="" disabled>Select a city</option>
+                                                <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+                                              </select>
+                                            </div>
+                                          </form>
+                                        </div> -->
+
+
+                  <div class="icone" style="margin-top:20px; ">
+                  <label for="description">Description</label>
+                  <textarea id="description" name="description" placeholder="Description"  [(ngModel)]="description" style=" width: 520px; height: 30px;"></textarea>                     
+                   </div>
+                   <div class="icone">      
+                         <label for="category" id="category">Category</label>
+                        </div> 
+                         <div class="category-buttons">
+                           <button type="button" class="category-button" [class.clicked]="isCategorySelected('cafe')" (click)="selectCategory('cafe')" value="cafe">
+                             <i class="fas fa-mug-hot"></i> Cafe
+                           </button>
+                           <button type="button" class="category-button" [class.clicked]="isCategorySelected('restaurant')" (click)="selectCategory('restaurant')" value="restaurant">
+                             <i class="fas fa-utensils"></i> Restaurant
+                           </button>
+                           <button type="button" class="category-button" [class.clicked]="isCategorySelected('camping-center')" (click)="selectCategory('camping-center')" value="camping-center">
+                            <i class="fas fa-campground"></i> Camping Center
+                          </button>
+                          <button type="button" class="category-button" [class.clicked]="isCategorySelected('park')" (click)="selectCategory('park')" value="park">
+                            <i class="fas fa-tree"></i> Park
+                          </button>
+                          <button type="button" class="category-button" [class.clicked]="isCategorySelected('gaming-rooms')" (click)="selectCategory('gaming-rooms')" value="gaming-rooms">
+                            <i class="fas fa-gamepad"></i> Gaming Rooms
+                          </button>
+                          <button type="button" class="category-button" [class.clicked]="isCategorySelected('amusement-parks')" (click)="selectCategory('amusement-parks')" value="amusement-parks">
+                            <i class="fas fa-funnel-dollar"></i> Amusement Parks
+                          </button>
+                          </div>
+                                                
+                        <input type="hidden" id="category" name="category" value=""/>
+                        <div class="icone">
+                            <label for="type">Type</label>
+                              <br>
+                              <div *ngIf="category === 'cafe'">
+                                <button class="event-button" [class.clicked]="selectedType === 'Drive-Thru Coffee'" (click)="selecttype('Drive-Thru Coffee')">Drive-Thru Coffee</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Coffee and Tea House'" (click)="selecttype('Coffee and Tea House')">Coffee and Tea House</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Coffee Lounge'" (click)="selecttype('Coffee Lounge')">Coffee Lounge</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Bakery/Café'" (click)="selecttype('Bakery/Café')">Bakery/Café</button>
+                              </div>
+                              
+                              <div *ngIf="category === 'park'">
+                                <button class="event-button" [class.clicked]="selectedType === 'National Parks'" (click)="selecttype('National Parks')">National Parks</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'State Parks'" (click)="selecttype('State Parks')">State Parks</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'County Parks'" (click)="selecttype('County Parks')">County Parks</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Regional Parks'" (click)="selecttype('Regional Parks')">Regional Parks</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Urban Parks'" (click)="selecttype('Urban Parks')">Urban Parks</button>
+                              </div>
+                              
+          
+                              <div *ngIf="category === 'camping-center'">
+                                <button class="event-button" [class.clicked]="selectedType === 'National Park Campgrounds'" (click)="selecttype('National Park Campgrounds')">National Park Campgrounds</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'State Park Campgrounds'" (click)="selecttype('State Park Campgrounds')">State Park Campgrounds</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Forest Service Campgrounds'" (click)="selecttype('Forest Service Campgrounds')">Forest Service Campgrounds</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Private Campgrounds'" (click)="selecttype('Private Campgrounds')">Private Campgrounds</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Glamping Resorts'" (click)="selecttype('Glamping Resorts')">Glamping Resorts</button>
+                              </div>
+                              
+                              
+                              <div *ngIf="category === 'restaurant'">
+                                <button class="event-button" [class.clicked]="selectedType === 'Fine Dining'" (click)="selecttype('Fine Dining')">Fine Dining</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Casual Dining'" (click)="selecttype('Casual Dining')">Casual Dining</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Fast Casual'" (click)="selecttype('Fast Casual')">Fast Casual</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Bistros'" (click)="selecttype('Bistros')">Bistros</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Ethnic Restaurants'" (click)="selecttype('Ethnic Restaurants')">Ethnic Restaurants</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Vegetarian/Vegan Restaurants'" (click)="selecttype('Vegetarian/Vegan Restaurants')">Vegetarian/Vegan Restaurants</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Buffet Restaurants'" (click)="selecttype('Buffet Restaurants')">Buffet Restaurants</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Family Style Restaurants'" (click)="selecttype('Family Style Restaurants')">Family Style Restaurants</button>
+                              </div>
+                              
+                              
+                              <div *ngIf="category === 'gaming-rooms'">
+                                <button class="event-button" [class.clicked]="selectedType === 'Arcade'" (click)="selecttype('Arcade')">Arcade</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Console Gaming Room'" (click)="selecttype('Console Gaming Room')">Console Gaming Room</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'PC Gaming Room'" (click)="selecttype('PC Gaming Room')">PC Gaming Room</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Virtual Reality (VR) Gaming Room'" (click)="selecttype('Virtual Reality (VR) Gaming Room')">Virtual Reality (VR) Gaming Room</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Board Game Room'" (click)="selecttype('Board Game Room')">Board Game Room</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Retro Gaming Room'" (click)="selecttype('Retro Gaming Room')">Retro Gaming Room</button>
+                              </div>
+                              
+                              
+                              <div *ngIf="category === 'amusement-parks'">
+                                <button class="event-button" [class.clicked]="selectedType === 'Water Parks'" (click)="selecttype('Water Parks')">Water Parks</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Adventure Parks'" (click)="selecttype('Adventure Parks')">Adventure Parks</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Theme Parks'" (click)="selecttype('Theme Parks')">Theme Parks</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Family Entertainment Centers'" (click)="selecttype('Family Entertainment Centers')">Family Entertainment Centers</button>
+                                <button class="event-button" [class.clicked]="selectedType === 'Animal Theme Parks'" (click)="selecttype('Animal Theme Parks')">Animal Theme Parks</button>
+                              </div>
+                              
+                              <button *ngFor="let option of options" class="event-button" [class.clicked]="selectedType === option" (click)="selecttype(option)" [value]="option">{{ option }}</button>
+                              <div *ngIf="category">
+                                <button class="event-button" (click)="addOptionInput()">More options +</button>
+                                <div *ngIf="showOptionInput" class="option-input-container">
+                                  <input type="text" [(ngModel)]="newOption" name="newOption" placeholder="Enter new option" />
+                                  <button class="option-button" (click)="addOption()">Add Option</button>
+                                </div>
+                              </div>
+                                        <div class="menu">
+                                          <label id="Destination" for="destination">Destination</label>
+                                        
+                                          <label for="destination-file" class="file-upload-label">
+                                            <div class="file-upload-design">
+                                              <span class="browse-button">
+                                                <i class="fa-solid fa-file-circle-plus" ></i> Add Images
+                                              </span>
+                                            </div>
+                                            <input id="destination-file" type="file" (change)="onDestinationFileSelected($event)" multiple />
+                                          </label>
+                                        
+                                          <div class="uploaded-images">
+                                            <div *ngFor="let image of uploadedImages2; let i = index" class="image-container">
+                                              <img [src]="image.url" alt="Destination image" />
+                                              <span class="delete-button" (click)="removeImage2(i)">X</span>
+
+                                            </div>
+                                          </div>
+                                        </div>
+                                        </div>
+                                      <div class="button-container">
+                                          <input type="button" name="previous" class="action-button-previous" value="Previous" (click)="previousStep()"/>
+                                          <input type="button" name="next" class="action-button" value="Next " (click)="nextStep()"/>
+                                      </div>
+                                </div>
+                              </fieldset>
+  
+                              <fieldset *ngIf="currentStep === 3">
+                                <div class="form-card">
+                                  <h2 class="fs-title">Destination services</h2>
+                                  <div class="menu">
+                                    <label id="Menu" for="menu">Menu</label>
+                                    <label for="file" class="file-upload-label">
+                                      <div class="file-upload-design">
+                                        <span class="browse-button">
+                                          <i class="fa-solid fa-file-circle-plus"></i>Add Images
+                                        </span>
+                                      </div>
+                                      <input id="file" type="file" (change)="onFileSelected($event)" multiple />
+                                    </label>
+                                    <div class="uploaded-images">
+                                      <div *ngFor="let image of uploadedImages; let i = index" class="image-container">
+                                        <img [src]="image.url" alt="Selected image" />
+                                        <span class="delete-button" (click)="removeImage(i)">X</span> 
+
+                                      </div>
+                                    </div>
+                                    </div>
+
+                                <div class="option">
+                                  <label for="wifiAvailable"><i class="fa-solid fa-wifi"></i>WiFi Availability:</label>
+                                  <div class="radio-group">
+                                      <div class="radio">
+                                          <input type="radio" name="r1" value="available" [(ngModel)]="wifi_availibily">
+                                          <span>Yes</span>
+                                      </div>
+                                      <div class="radio">
+                                          <input type="radio" name="r1" value="not-available" [(ngModel)]="wifi_availibily">
+                                          <span>No</span>
+                                      </div>
+                                  </div>
+                                  </div>
+                                  <div class="option">
+                                  <label for="pet"><i class="fa-solid fa-paw"></i>Pet friendly:</label>
+                                  <div class="radio-group">
+                                      <div class="radio">
+                                          <input type="radio" name="r2" value="available" [(ngModel)]="pet_friendly">
+                                          <span>Yes</span>
+                                      </div>
+                                      <div class="radio">
+                                          <input type="radio" name="r2" value="not-available" [(ngModel)]="pet_friendly">
+                                          <span>No</span>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="option">
+                                <label for="kids"><i class="fa-solid fa-children"></i>kids corner:</label>
+                                <div class="radio-group">
+                                    <div class="radio">
+                                        <input type="radio" name="r3" value="available" [(ngModel)]="kids_corner">
+                                        <span>Yes</span>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="r3" value="not-available" [(ngModel)]="kids_corner">
+                                        <span>No</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="option">
+                              <label for="smoking"><i class="fa-solid fa-smoking"></i>Smoking area:</label>
+                              <div class="radio-group">
+                                  <div class="radio">
+                                      <input type="radio" name="r4" value="available" [(ngModel)]="smoking_area">
+                                      <span>Yes</span>
+                                  </div>
+                                  <div class="radio">
+                                      <input type="radio" name="r4" value="not-available" [(ngModel)]="smoking_area">
+                                      <span>No</span>
+                                  </div>
+                              </div>
+                          </div>
+                                  
+                          <div class="option">
+                            <label for="parking"><i class="fa-solid fa-square-parking"></i>Parking:</label>
+                            <div class="radio-group">
+                                <div class="radio">
+                                    <input type="radio" name="r5" value="available" [(ngModel)]="parking">
+                                    <span>Yes</span>
+                                </div>
+                                <div class="radio">
+                                    <input type="radio" name="r5" value="not-available" [(ngModel)]="parking">
+                                    <span>No</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option">
+                          <label for="card"><i class="fa-regular fa-credit-card"></i>Credit card:</label>
+                          <div class="radio-group">
+                              <div class="radio">
+                                  <input type="radio" name="r6" value="available" [(ngModel)]="credit_card">
+                                  <span>Yes</span>
+                              </div>
+                              <div class="radio">
+                                  <input type="radio" name="r6" value="not-available" [(ngModel)]="credit_card">
+                                  <span>No</span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="option">
+                        <label for="reservation"><i class="fa-solid fa-calendar-check"></i>Reservation:</label>
+                        <div class="radio-group">
+                            <div class="radio">
+                                <input type="radio" name="r7" value="available" [(ngModel)]="reservation">
+                                <span>Yes</span>
+                            </div>
+                            <div class="radio">
+                                <input type="radio" name="r7" value="not-available" [(ngModel)]="reservation">
+                                <span>No</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="opening-hours">
+                      <span>Opening hour:</span>
+                      <input type="time" id="openingHours" name="openingHours" placeholder="Opening Hours" [(ngModel)]="opening_hour" style="width: auto;"/>
+                      <span>Closing hour:</span>
+                      <input type="time" id="closingHours" name="closingHours" placeholder="Closing Hours" [(ngModel)]="closing_hour" style="width: auto;"/>
+                    </div>
+
+                    <div class="price-container">
+                      <div class="price-content">
+                        <label for="firstName">Price range</label>
+                        <div class="values">
+                          <div>$<span id="first">{{ minValue }}</span></div> -
+                          <div>$<span id="second">{{ maxValue }}</span></div>
+                        </div>
+                        <small class="current-range">
+                          Current Range:
+                          <div>$<span id="third">{{ currentRange }}</span></div>
+                        </small>
+                        <div class="slider">
+                          <label class="label-min-value">0</label>
+                          <label class="label-max-value">400</label>
+                        </div>
+                        <div class="rangeslider">
+                          <input class="min input-ranges" name="range_1" type="range" min="0" max="400" [(ngModel)]="minValue" (input)="updateMinValue($event)" step="5">
+                          <input class="max input-ranges" name="range_2" type="range" min="0" max="400" [(ngModel)]="maxValue" (input)="updateMaxValue($event)" step="5" [ngClass]="{'hidden': !isMaxVisible}">
+                        </div>
+                      </div>
+                    </div>
+                     <div class="button-container">
+                        <input type="button" name="previous" class="action-button-previous" value="Previous" (click)="previousStep()"/>
+                        <input type="button" name="next" class="action-button" value="Next " (click)="nextStep()"/>
+                      </div>
+                      </div>
+                    </fieldset>
+                    <fieldset *ngIf="currentStep === 4">
+                     <div class="form-card">
+                     <h2 class="fs-title">Contact</h2>
+                     <div class="group">
+                     <div class="name">
+                     <label for="firstName">Email</label>
+                     <input type="text" id="firstName" name="firstName" placeholder="Email" [(ngModel)]="email_destination"/>
+                        <i class="fa-solid fa-envelope"></i>
+                      </div>
+                      <div class="name">
+                        <label for="lastName">Phone number</label>
+                          <input type="text" id="lastName" name="lastName" placeholder="+phone number" [(ngModel)]="destinaition_phone_number"/>
+                          <i class="fa-solid fa-mobile-screen-button"></i>
+                        </div>
+                        </div>
+                       <div class="group">
+                       <div class="name">
+                          <label for="firstName">Facebook</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="facebook" [(ngModel)]="facebook"/>
+                             <i class="fa-brands fa-facebook"></i>   
+                              </div>
+                              <div class="name">
+                                 <label for="lastName">Instagram</label>
+                                 <input type="text" id="lastName" name="lastName" placeholder="Instagram" [(ngModel)]="instagram"/>
+                                  <i class="fa-brands fa-instagram"></i>
+                                </div>
+                               </div>
+                               <div class=" icone">
+                                  <label for="website" >Website </label>   
+                                  <input type="text" id="website" name="website" placeholder=" URL" [(ngModel)]="website"> <i class="fa fa-globe" ></i>
+                                    </div>
+                                    <div class="button-container">
+                                      <input type="button" name="previous" class="action-button-previous" value="Previous" (click)="previousStep()"/>
+                                      <input type="button" name="next" class="action-button" value="Submit " (click)="adddestination()"/>
+                                    </div>
+                                  </div>
+                            </fieldset>
+                            <fieldset *ngIf="currentStep === 5">
+                              <div class="form-card finish">
+                                <h2 class="fs-title">Success</h2>
+                                  <p>Your form has been sent successfully!
+                                    <br>Thank you !
+                                  </p>
+                                  <input type="button" name="finish" class="finish-button" value="finish " routerLink="/home" />
+                                </div>
+
+                          </fieldset>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>

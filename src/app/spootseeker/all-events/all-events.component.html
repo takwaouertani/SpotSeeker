@@ -1,0 +1,168 @@
+<app-navbar></app-navbar>
+<br><br><br>
+<div class="container">
+    <aside class="sidebar">
+        <div class="scrollable-container"> 
+    
+            <div class="container1">
+                <div class="governorate">
+                    <p>Governorate</p>
+                    <select id="states" [(ngModel)]="selectedState" (change)="displayCities()" class="option">
+                      <option value="">Select a Governorate</option>
+                      <option *ngFor="let state of getStates()" [value]="state">{{ state }}</option>
+                    </select>
+                  </div>
+                <div class="city">
+                  <p>City</p>
+                  <select id="cities" [(ngModel)]="selectedCity" class="custom-select" class="option">
+                    <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+                  </select>
+                </div>
+                
+              </div>
+                
+            <button class="rechercher" type="submit" (click)="filterevent()">Submit</button>
+            <hr>
+            <div class="form-group">
+                <h3>Refine Your Search</h3>
+                <ul>
+                    <li>
+                        <input type="checkbox" name="checked" [(ngModel)]="free_tickets">
+                        <label>free tickets</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked" [(ngModel)]="access_vip">
+                        <label>vip access</label>
+                    </li>
+                    
+                   
+                    
+                    
+                </ul>
+            </div>
+            <div class="form-group">
+                <h3>Event Category</h3>
+                <ul>
+                    <li>
+                        <input type="radio" name="cuisine" [(ngModel)]="selectedcategory" value="Camping">
+                        <label>Camping</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="cuisine" [(ngModel)]="selectedcategory" value="Musical Concert">
+                        <label>Musical Concert</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="cuisine" [(ngModel)]="selectedcategory" value="Workshops">
+                        <label>Workshops</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="cuisine" [(ngModel)]="selectedcategory" value="Food Festivals">
+                        <label>Food Festivals</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="cuisine" [(ngModel)]="selectedcategory" value="Carnivals">
+                        <label>Carnivals</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="cuisine" [(ngModel)]="selectedcategory" value="Picnic Trip">
+                        <label>Picnic Trip</label>
+                    </li>
+                </ul>
+            </div> 
+            
+
+            <button class="confirmer" type="submit" (click)="Destinationfiltree()">Confirmer</button>
+
+        </div>
+    
+</aside>
+    <main class="content">
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Restaurant Name..." [(ngModel)]="searchTerm" (input)="Destinationfiltreeparnom()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+            </svg>
+        </div>
+        
+        <div *ngIf="filtrernom && filtrer == false && eventstatecity == false">
+            <div class="restaurant-container">
+                <div class="restaurant-card" *ngFor="let event of eventparnomlist">
+                    <div class="image-slider">
+                        <img *ngFor="let image of event.images" [src]="image">
+                    </div>
+                    <div class="espace">
+                        <h3>{{ event.name_event }}</h3>
+                    </div>
+                    <p><strong>Location:</strong> {{ event.adresse }}</p>
+                    <p><strong>Vibe:</strong> {{ event.category }}</p>
+                    <button class="details-button" (click)="navigateToDetails(event.id_event)">See More</button>
+                </div>
+            </div>
+        </div>
+       
+
+        <div *ngIf="filtrer == false && filtrernom == false && eventstatecity == false">
+            <div class="restaurant-container">
+                <div class="restaurant-card" *ngFor="let event of eventlist">
+                    <div class="image-slider">
+                        <img *ngFor="let image of event.images" [src]="image">
+                    </div>
+                    <div class="espace">
+                        
+                        <h3>{{ event.name_event }}</h3>
+                    </div>
+                    <p><strong>Location:</strong> {{ event.adresse }}</p>
+                    <p><strong>Vibe:</strong> {{ event.category }}</p><br><br>
+                    <button class="details-button" (click)="navigateToDetails(event.id_event)" [routerLink]="['/event', event.id_event]">See More</button>
+                </div>
+            </div>
+        </div>
+        
+        
+    
+    <div *ngIf="filtrer==true && filtrernom== false && eventstatecity == false">
+        <div class="restaurant-container">
+            <div class="restaurant-card" *ngFor="let event of eventCategorylist">
+              <div class="image-slider">
+                <img *ngFor="let image of event.images" [src]="image">
+              </div>
+              <div class="espace">
+                <h3>{{ event.name_event }}</h3>
+              </div>
+              <p><strong>Location:</strong> {{ event.adresse }}</p>
+              <p><strong>Vibe:</strong> {{ event.category }}</p>
+              <button class="details-button" (click)="navigateToDetails(event.id_event)">See More</button>
+            </div>
+          </div>
+    </div>
+
+
+
+    <div *ngIf="nonfilter && filtrer == true && filtrernom == false " class="no-destination">
+        <i class="fas fa-search"></i>
+        <h1>No Event found</h1>
+    </div>
+
+     <div *ngIf="eventstatecity && nonfilter == false && filtrer == false && filtrernom == false">
+        <div class="restaurant-container">
+            <div class="restaurant-card" *ngFor="let event of eventslistparcitystate">
+              <div class="image-slider">
+                <img *ngFor="let image of event.images" [src]="image">
+              </div>
+              <div class="espace">
+                <h3>{{ event.name_event }}</h3>
+              </div>
+              <p><strong>Location:</strong> {{ event.adresse }}</p>
+              <p><strong>Vibe:</strong> {{ event.category }}</p>
+              <button class="details-button" (click)="navigateToDetails(event.id_event)">See More</button>
+            </div>
+          </div>
+    </div>
+    <div *ngIf="eventstatecity && nonfilter == true && filtrer == false && filtrernom == false"class="no-destination">
+        <i class="fas fa-search"></i>
+        <h1>No Event found</h1>
+    </div>
+
+    
+    
+  </main>

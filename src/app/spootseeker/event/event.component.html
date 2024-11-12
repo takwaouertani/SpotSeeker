@@ -1,0 +1,167 @@
+<app-navbar></app-navbar><br><br>
+<section style="background-color: #e5e4e3;height: 2000px;">
+    <div class="slider">
+      <div class="list">
+        <div class="item" *ngFor="let image of event.images">
+          <img [src]="image">
+        </div>
+      </div>
+        <div class="buttons">
+            <button id="prev">&lt;</button>
+            <button id="next">&gt;</button>
+        </div>
+        <ul class="dots">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+      
+    </div>
+    
+    <div class="container">
+       
+         
+         <!-- <div class="section">
+             <p style="text-align: center;font-weight: bold;">Ratings and Reviews</p>
+             4.5  <i class="fa fa-star" aria-hidden="true"></i>
+             <br>
+             <i class="fa-solid fa-utensils"></i>  food <br> 
+             <i class="fa-solid fa-bell-concierge"></i>   service <br>
+             <i class="fas fa-smile" aria-hidden="true"></i> Atmosphere 
+         </div> -->
+         
+    
+        <div class="section">
+            <p style="text-align: center;font-weight: bold;">Details</p> <br>
+            debut date: {{ event.date_debut }}<br>
+            Ending date: {{ event.date_fin }}<br>
+            Debut hour: {{ event.heure_debut }}<br>
+            Ending hour: {{ event.heure_fin }}<br>
+            Event category: {{ event.category }}<br>
+            Event Type: {{ event.type_event }}<br>
+            Price Range: $ {{ event.prix }}<br>
+            Meals:  <br><br><br>
+            
+            
+            <button  class="moredetails" (click)="openPopup()">View more details</button>
+          </div>
+          
+          <div class="popup-container" *ngIf="isPopupVisible">
+            <div class="popup">
+              <span class="close-button" (click)="closePopup()">X</span>
+              <p style="text-align: center;font-weight: bold;">Location</p>{{ event.adresse }}<br>
+              <p style="text-align: center;font-weight: bold;">Contact</p><br>
+              <p>Email:  {{ event.email_events }}</p><br>
+              <p>Phone number:{{ event.event_phone_number }}</p><br>
+              <p>website:  {{ event.website }}</p><br>
+              <p>facebook:  {{ event.facebook }}</p><br>
+              <p>instagram:{{ event.instagram }}</p><br>
+              <p style="text-align: center;font-weight: bold;">Features </p><br>
+            <div class="firstpart">
+              <p>VIP access:  {{ event.access_vip }}</p><br>
+              <p>free_entry:  {{ event.free_tickets }}</p><br>
+              
+            </div>
+            <div class="secondpart">
+                <p>cuisine:</p><br>
+                <p>Capacity :  {{ event.Capacity }}</p><br>
+               
+    
+              </div>
+            </div>
+          </div>
+          <!-- MENU SECTION -->
+          
+        <div class="section">
+            <p style="text-align: center;font-weight: bold;">Menu
+            </p>
+            <div class="menu">
+              
+              <img *ngFor="let image of menuImagesa" [src]="image.url" [style]="image.style">
+              <div class="side-images">
+                <img *ngFor="let image of menuImagesb" [src]="image.url" [style]="image.style">
+    
+    
+              </div>
+              <img *ngFor="let image of menuImagesc" [src]="image.url" [style]="image.style">
+              <div>       
+                <img *ngFor="let image of menuImagesd" [src]="image.url" [style]="image.style">
+    </div>
+          </div>
+          
+          <button *ngIf="!isPopupVisible && !isPopupVisible2" class="view-more" (click)="openPopup2()">
+            <i class="fa-regular fa-images"></i>
+          </button>
+                <div class="popup-container" *ngIf="isPopupVisible2">
+            <div class="popup scrollable-container" style="width: 900px;height: 600px;">
+              <span class="close-button" (click)="closePopup2()">X</span>
+              <div class="menu">
+                <img *ngFor="let image of menuImagese" [src]="image.url" [style]="image.style">
+                <div class="side-images">
+                  <img *ngFor="let image of menuImagesf" [src]="image.url" [style]="image.style">
+    
+                </div>
+                <img src="assets/food13.jpg" alt="" style="height: 300px; width: 220px; margin-top: 20px;border-radius: 9px; margin-left: 10px; ">
+                <div class="side-images">
+                  <img src="assets/food4.jpg" alt="" class="blurry" style="height: 144px; width: 180px;border-radius: 9px;">
+                  <img src="assets/food1.jpg" alt="" class="blurry" style="height: 144px; width: 180px;border-radius: 9px;">
+              </div>
+              
+            </div>
+            <div class="menu">
+              <img src="assets/food12.jpg" alt="" style="height: 300px; width: 220px; margin-top: 20px;border-radius: 9px;">
+              <div class="side-images">
+                  <img src="assets/food2.jpg" alt="" class="blurry" style="height: 144px; width: 180px;border-radius: 9px;">
+                  <img src="assets/food3.jpg" alt="" class="blurry" style="height: 144px; width: 180px;border-radius: 9px;">
+    
+              </div>
+              <img src="assets/food12.jpg" alt="" style="height: 300px; width: 220px; margin-top: 20px;border-radius: 9px; margin-left: 10px; ">
+              <div class="side-images">
+                <img src="assets/food2.jpg" alt="" class="blurry" style="height: 144px; width: 180px;border-radius: 9px;">
+                <img src="assets/food3.jpg" alt="" class="blurry" style="height: 144px; width: 180px;border-radius: 9px;">
+            </div>
+            
+          </div>
+          <div class="menu">
+            <img src="assets/food9.jpg" alt="" style="height: 300px; width: 220px; margin-top: 20px;border-radius: 9px;">
+            <div class="side-images">
+                <img src="assets/food2.jpg" alt="" class="blurry" style="height: 144px; width: 180px;border-radius: 9px;">
+                <img src="assets/food3.jpg" alt="" class="blurry" style="height: 144px; width: 180px;border-radius: 9px;">
+    
+            </div>
+            <img src="assets/food7.jpg" alt="" style="height: 300px; width: 220px; margin-top: 20px;border-radius: 9px; margin-left: 10px; ">
+            <div class="side-images">
+              <img src="assets/food14.webp" alt="" class="blurry" style="height: 144px; width: 180px;border-radius: 9px;">
+              <img src="assets/food15.jpg" alt="" class="blurry" style="height: 144px; width: 180px;border-radius: 9px;">
+          </div>
+          
+        </div>
+            </div>
+          </div>
+    
+          
+          
+            <br>
+          <br>
+         
+    
+    
+        </div>
+    
+    
+    </div>
+    
+    <div *ngIf="!isPopupVisible && !isPopupVisible2"  class="placename" >
+      <ng-container>
+        <p class="place"> {{ event.name_event }}</p>
+    
+      </ng-container>
+     
+    
+    </div>
+    
+    
+    
+    </section>

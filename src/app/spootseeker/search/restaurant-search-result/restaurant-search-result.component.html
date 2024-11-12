@@ -1,0 +1,224 @@
+<app-navbar></app-navbar>
+ <br><br><br>
+ <div class="container">
+
+ <main class="content">
+    <div class="filter-container">
+        <div class="filter-item">
+          <p>Governorate</p>
+          <select id="states" [(ngModel)]="selectedState" (change)="displayCities()" class="option">
+            <option value="">Select a Governorate</option>
+            <option *ngFor="let state of getStates()" [value]="state">{{ state }}</option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <p>City</p>
+          <select id="cities" [(ngModel)]="selectedCity" class="custom-select option">
+            <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+          </select>
+        </div>
+        <button class="rechercher" type="submit" (click)="filterDestinations()">Submit</button>
+      </div>
+      
+      
+      <h5>Results for</h5>
+ 
+     <h2 class="title">Top Picks in Your Location</h2>
+  
+         <div *ngIf="filtrerecherche1 && filtrerecherche2==false && filtrerecherche3==false && nonfilter== false">
+             <div class="result-container" *ngFor="let destination of filteredDestinations" >
+                 <div class="result">
+                     <div class="image-slider">
+                         <div class="slides" [style.transform]="'translateX(-' + currentIndex[destination.id_destination] * 100 + '%)'">
+                             <div class="slide" *ngFor="let image of destination.images">
+                                 <img [src]="image">
+                             </div>
+                         </div>
+                         <button class="prev" (click)="prevSlide(destination)">❮</button>
+                         <button class="next" (click)="nextSlide(destination)">❯</button>
+                     </div>
+                     <div class="result-data">
+                         <div class="result-rate">
+                             <div>
+                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                             <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+                         </svg>
+                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                             <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+                         </svg>
+                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                             <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+                         </svg>
+                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                             <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+                         </svg>
+                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                             <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+                         </svg>
+                     </div>
+                             <div>
+                                 <br><p style="font-style: italic; font-size: smaller;">100 views</p><br>
+                             </div>
+                         </div>
+                         <div>
+                             <h2>{{ destination.name_destination }}</h2>
+                             <div>
+                                 <p style="font-style: italic">
+                                     <strong>Location:</strong> {{ destination.adresse }}<br>
+                                     <strong>Opening Date:</strong> {{ destination.opening_hour }}<br>
+                                     <strong>Closing Date:</strong> {{ destination.closing_hour }}<br>
+                                     <strong>{{ destination.reservation ? 'With Reservation' : 'No Reservation' }}</strong><br>
+                                     <strong>Vibe:</strong> {{ destination.category }}<br>
+                                     {{ destination.description }}
+                                 </p>
+                                 <button class="details-button" (click)="navigateToDetails(destination.id_destination)" [routerLink]="['/place', destination.id_destination]">See More</button>
+                                </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+  
+ 
+ 
+ <div *ngIf="filtrerecherche2 && filtrerecherche1==false && filtrerecherche3==false && nonfilter==false">
+   <div class="result-container" *ngFor="let destination of destinationCategorylist">
+     <div class="result">
+         <div class="image-slider">
+             <div class="slides" [style.transform]="'translateX(-' + currentIndex[destination.id_destination] * 100 + '%)'">
+                 <div class="slide" *ngFor="let image of destination.images">
+                     <img [src]="image">
+                 </div>
+             </div>
+             <button class="prev" (click)="prevSlide(destination)">❮</button>
+             <button class="next" (click)="nextSlide(destination)">❯</button>
+         </div>
+         <div class="result-data">
+         <div class="result-rate">
+             <div>
+             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                 <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+             </svg>
+             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                 <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+             </svg>
+             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                 <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+             </svg>
+             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                 <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+             </svg>
+             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                 <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+             </svg>
+         </div>
+           <div>
+             <br><p style="font-style: italic; font-size: smaller;">100 views</p><br>
+           </div>
+         </div>
+         <div>
+           <h2>{{ destination.name_destination }}</h2>
+           <div>
+             <p style="font-style: italic">
+               <strong>Location:</strong> {{ destination.adresse }}<br>
+               <strong>Opening Date:</strong> {{ destination.opening_hour }}<br>
+               <strong>Closing Date:</strong> {{ destination.closing_hour }}<br>
+               <strong>{{ destination.reservation ? 'With Reservation' : 'No Reservation' }}</strong><br>
+               <strong>Vibe:</strong> {{ destination.category }}<br>
+               {{ destination.description }}
+             </p>
+             <button class="details-button" (click)="navigateToDetails(destination.id_destination)" [routerLink]="['/place', destination.id_destination]">See More</button>
+ 
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <div *ngIf="nonfilter==false && filtrerecherche3 && filtrerecherche1==false && filtrerecherche2==false">
+     <div class="result-container" *ngFor="let destination of destinationlistparcitystate" >
+         <div class="result">
+             <div class="image-slider">
+                 <div class="slides" [style.transform]="'translateX(-' + currentIndex[destination.id_destination] * 100 + '%)'">
+                     <div class="slide" *ngFor="let image of destination.images">
+                         <img [src]="image">
+                     </div>
+                 </div>
+                 <button class="prev" (click)="prevSlide(destination)">❮</button>
+                 <button class="next" (click)="nextSlide(destination)">❯</button>
+             </div>
+             <div class="result-data">
+                 <div class="result-rate">
+                     <div>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                         <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+                     </svg>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                         <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+                     </svg>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                         <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+                     </svg>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                         <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+                     </svg>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                         <path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25zM8 11.276l2.573 1.353-.488-2.845 2.07-2.018-2.866-.417L8 5.106 6.711 8.349l-2.865.417 2.07 2.018-.489 2.845L8 11.276z"/>
+                     </svg>
+                 </div>
+                     <div>
+                         <br><p style="font-style: italic; font-size: smaller;">100 views</p><br>
+                     </div>
+                 </div>
+ 
+                 <div >
+                     <div>
+                         <h2>{{ destination.name_destination }}</h2>
+                         <div>
+                             <p style="font-style: italic">
+                                 <strong>Location:</strong> {{ destination.adresse }}<br>
+                                 <strong>Opening Date:</strong> {{ destination.opening_hour }}<br>
+                                 <strong>Closing Date:</strong> {{ destination.closing_hour }}<br>
+                                 <strong>{{ destination.reservation ? 'With Reservation' : 'No Reservation' }}</strong><br>
+                                 <strong>Vibe:</strong> {{ destination.category }}<br>
+                                 {{ destination.description }}
+                             </p>
+                             <button class="details-button" (click)="navigateToDetails(destination.id_destination)" [routerLink]="['/place', destination.id_destination]">See More</button>
+                            </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <div *ngIf="nonfilter && filtrerecherche2 && filtrerecherche1==false && filtrerecherche3==false">
+     <h1 class="nondispo">No Destination found </h1>
+ </div>
+ 
+  <div *ngIf="nonfilter && filtrerecherche3 && filtrerecherche1==false && filtrerecherche2==false">
+     <h1 class="nondispo">No Destination found </h1>
+ </div> 
+ 
+ <div *ngIf="nonfilter && filtrerecherche1 && filtrerecherche3==false && filtrerecherche2==false">
+     <h1 class="nondispo">No Destination found </h1>
+ </div>
+ </main>
+ 
+ </div>

@@ -1,0 +1,235 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <aside class="sidebar">
+        <div class="scrollable-container"> 
+    
+            <div class="container1">
+                <div class="governorate">
+                    <p>Governorate</p>
+                    <select id="states" [(ngModel)]="selectedState" (change)="displayCities()" class="option">
+                      <option value="">Select a Governorate</option>
+                      <option *ngFor="let state of getStates()" [value]="state">{{ state }}</option>
+                    </select>
+                  </div>
+                <div class="city">
+                  <p>City</p>
+                  <select id="cities" [(ngModel)]="selectedCity" class="custom-select" class="option">
+                    <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+                  </select>
+                </div>
+                
+              </div>
+                
+            <button class="rechercher" type="submit" (click)="filterDestinations()">Submit</button>
+            <hr>
+            <div class="form-group">
+                <h3>Refine Your Search</h3>
+                <ul>
+                    <li>
+                        <input type="checkbox" name="checked" [(ngModel)]="parking_Space">
+                        <label>Parking Space</label>
+                    </li>
+                   
+                    <li>
+                        <input type="checkbox" name="checked" [(ngModel)]="Free_Wifi">
+                        <label>Free Wifi</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked" [(ngModel)]="Pet_Friendly">
+                        <label>Pet Friendly</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked" [(ngModel)]="Kids_Corner">
+                        <label>Kid's Corner</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="checked" [(ngModel)]="smoking_area">
+                        <label>Smoking Space</label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="form-group">
+                <h3>Park Types</h3>
+                <ul>
+                    <li>
+                        <input type="radio" name="ttype" [(ngModel)]="selectedtype" value="Drive-thru coffee">
+                        <label>National Parks</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="ttype" [(ngModel)]="selectedtype" value="State Parks">
+                        <label>State Parks</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="ttype" [(ngModel)]="selectedtype" value="City Parks">
+                        <label>City Parks</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="ttype" [(ngModel)]="selectedtype" value="Country Parks">
+                        <label>Country Parks</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="ttype" [(ngModel)]="selectedtype" value="Regional Parks">
+                        <label>Regional Parks</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="ttype" [(ngModel)]="selectedtype" value="Urban Parks">
+                        <label>Urban Parks</label>
+                    </li>
+
+                    <li>
+                        <input type="radio" name="ttype" [(ngModel)]="selectedtype" value="Water_Parks">
+                        <label>Water Parks</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="ttype" [(ngModel)]="selectedtype" value="Adventure_Parks">
+                        <label>Adventure Parks</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="ttype" [(ngModel)]="selectedtype" value="Family_Entertaiment_Centers">
+                        <label>Family Entertaiment Centers</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="ttype" [(ngModel)]="selectedtype" value="Animal_Theme_Parks">
+                        <label>Animal Theme Parks</label>
+                    </li>
+                 
+                   
+                  
+                </ul>
+            </div>
+            <div class="form-group">
+                <h3>Camping Centers Types</h3>
+                <ul>
+                   
+                   
+
+                    <li>
+                        <input type="radio" name="ttype" [(ngModel)]="selectedtype" value="National_Park_Campground">
+                        <label>National Park Campgrounds</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="ttype" [(ngModel)]="selectedtype" value="State_Park_Campground">
+                        <label>State Park Campgrounds</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="ttype" [(ngModel)]="selectedtype" value="Forest_Service_Campground">
+                        <label>Forest Service Campgrounds</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="ttype" [(ngModel)]="selectedtype" value="Private_Campground">
+                        <label>Private Campgrounds</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="ttype" [(ngModel)]="selectedtype" value="Glamping_Resorts">
+                        <label>Glamping Resorts</label>
+                    </li>
+                   
+                  
+                </ul>
+            </div>
+
+            <button class="rechercher" type="submit" (click)="Destinationfiltree()">Confirmer</button>
+
+        </div>
+    
+</aside>
+    <main class="content">
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Park Name..." [(ngModel)]="searchTerm" (input)="Destinationfiltreeparnom()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+            </svg>
+        </div>
+        
+        <div *ngIf="filtrernom && filtrer == false && destinationstatecity == false">
+            <div class="restaurant-container">
+                <div class="restaurant-card" *ngFor="let destination of destinationparnomlist">
+                    <div class="image-slider">
+                        <img *ngFor="let image of destination.images" [src]="image">
+                    </div>
+                    <div class="espace">
+                        <h3>{{ destination.name_destination }}</h3>
+                    </div>
+                    <p>{{ destination.state }},{{ destination.city }}</p>
+
+                   <p>{{ destination.type_destination }}</p>
+                    <button class="details-button" (click)="navigateToDetails(destination.id_destination)">See More</button>
+                </div>
+            </div>
+        </div>
+       
+
+            <div *ngIf="filtrer == false && filtrernom == false && destinationstatecity == false">
+            <div class="restaurant-container">
+                <div class="restaurant-card" *ngFor="let destination of destinationlist">
+                    <div class="image-slider">
+                        <img *ngFor="let image of destination.images" [src]="image">
+                    </div>
+                    <div class="espace">
+                        
+                        <h3>{{ destination.name_destination }}</h3>
+                    </div>
+                    <p>{{ destination.state }},{{ destination.city }}</p>
+                   <p>{{ destination.type_destination }}</p>
+                    <button class="details-button" (click)="navigateToDetails(destination.id_destination)" [routerLink]="['/place', destination.id_destination]">See More</button>
+                </div>
+            </div>
+        </div>
+        
+        
+    
+    <div *ngIf="filtrer==true && filtrernom== false && destinationstatecity == false">
+        <div class="restaurant-container">
+            <div class="restaurant-card" *ngFor="let destination of destinationCategorylist">
+              <div class="image-slider">
+                <img *ngFor="let image of destination.images" [src]="image">
+              </div>
+              <div class="espace">
+                <h3>{{ destination.name_destination }}</h3>
+              </div>
+              <p>{{ destination.state }},{{ destination.city }}</p>
+              <p>{{ destination.type_destination }}</p>
+              <button class="details-button" (click)="navigateToDetails(destination.id_destination)">See More</button>
+            </div>
+          </div>
+    </div>
+
+
+
+     <div *ngIf="destinationstatecity && nonfilter == false && filtrer == false && filtrernom == false">
+        <div class="restaurant-container">
+            <div class="restaurant-card" *ngFor="let destination of destinationlistparcitystate">
+              <div class="image-slider">
+                <img *ngFor="let image of destination.images" [src]="image">
+              </div>
+              <div class="espace">
+                <h3>{{ destination.name_destination }}</h3>
+              </div>
+              <p>{{ destination.state }},{{ destination.city }}</p>
+              <p> {{ destination.type_destination }}</p>
+              <button class="details-button" (click)="navigateToDetails(destination.id_destination)">See More</button>
+            </div>
+          </div>
+    </div>
+
+    <div *ngIf="nonfilter && filtrer == true && filtrernom == false "class="no-destination">
+        <i class="fas fa-search"></i>
+        <h1>No picnic spots Found</h1>
+    </div>
+    <div *ngIf="destinationstatecity && nonfilter == true && filtrer == false && filtrernom == false" class="no-destination">
+        <i class="fas fa-search"></i>
+        <h1>No picnic spots Found</h1>
+    </div>
+
+
+
+    <div *ngIf="filtrernom && nonfilter== true && filtrer == false">
+        <div class="no-destination">
+            <i class="fas fa-search"></i>
+            <h1>No picnic spots Found</h1>
+        </div>
+    </div>
+    
+    
+  </main>

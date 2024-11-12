@@ -1,0 +1,85 @@
+<!-- SIDEBAR -->
+<div class="all">
+    <section id="sidebar" >
+        <a href="#" class="brand">
+            <img src="assets/LOGO.png" height="50px"  alt="image">
+        </a>
+        <ul class="side-menu top">
+            <li class="active">
+                <a routerLink="/admin/dashboard">
+                    <i class='bx bxs-dashboard' ></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/admin/destinations_management">
+                    <i class='bx bxs-map'></i>
+                    <span class="text">Destinations</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/admin/owners_requests">
+                    <i class='bx bxs-check-square'></i>
+                    <span class="text">Owners Requests</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/admin/event_organiser_request">
+                    <i class='bx bxs-check-square'></i>
+                    <span class="text">organisers Requests</span>
+                </a>
+            </li>
+            <li>
+                <a  routerLink="/admin/events_management">
+                    <i class='bx bxs-calendar-event'></i>
+                    <span class="text">Events</span>
+                </a>
+            </li>
+            <li>
+                <a  routerLink="/admin/reviews_management">
+                    <i class='bx bxs-message-dots' ></i>
+                    <span class="text">Reviews</span>
+                </a>
+            </li>
+           
+            <li>
+                <a >
+                    <i class="bx bxs-exit" aria-hidden="true"></i>
+
+                    
+                    <span class="text" (click)="logout()">Logout</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="side-menu">
+         
+           
+        </ul>
+    </section>
+    
+    
+    
+    <section id="content">
+        <nav>
+            <i class='bx bx-menu' (click)="toggleMenu()"></i>
+        
+
+
+            <a routerLink="/admin/reviews_management" class="notification">
+                <i class='bx bxs-bell' ></i>
+                <span class="num"> {{ CommentCount$ | async }}</span>
+            </a>
+        
+        </nav>
+    
+        <main>
+            
+    
+        
+           
+               
+            <router-outlet></router-outlet>
+
+        </main>
+    </section>
+    </div>

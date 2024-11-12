@@ -1,0 +1,19 @@
+/* .nav-link,.navbar-toggler,.navbar-toggler-icon{
+    color: #4a4b4b!important;
+} */
+
+
+li a{font-size: 18px;
+    font-weight: bold;
+    color: #292C2D;}
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000; 
+    }
+    .nav-link.active {
+        color: #5aa7bb;
+    }
+    
